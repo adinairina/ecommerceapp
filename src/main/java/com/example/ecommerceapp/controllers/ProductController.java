@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
+@CrossOrigin("http://localhost:4200")
 @RestController
 public class ProductController {
 
@@ -16,22 +16,22 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("api/products")
-    List<Product> findAllCategories() {
-        return (List<Product>) productService.findAllProducts();
+    @PostMapping("api/products")
+    public Product newProduct(@RequestBody Product product) {
+        return productService.saveProduct(product);
     }
 
-    @GetMapping("/api/products/{id}")
+    @GetMapping("api/products")
+    public List<Product> findAllProducts() {
+        return productService.findAllProducts();
+    }
+
+    @GetMapping("api/products/{id}")
     public Product findById(@PathVariable("id") long id) {
         return productService.findById(id);
     }
 
-    @PostMapping("/api/products")
-    public Product save(@RequestBody Product product) {
-        return productService.saveProduct(product);
-    }
-
-    @PutMapping("api/product/{id}")
+    @PutMapping("api/products/{id}")
     public Product updateProduct(@PathVariable("id") long id, @RequestBody Product product) {
         Optional<Product> productFromDatabase = Optional.ofNullable(productService.findById(id));
         if (productFromDatabase.isPresent()) {
@@ -51,7 +51,7 @@ public class ProductController {
     }
 
     @DeleteMapping("api/products/{id}")
-    public void deleteProductById(@PathVariable("id") long id){
+    public void deleteProductById(@PathVariable("id") long id) {
         productService.deleteProduct(id);
     }
 }

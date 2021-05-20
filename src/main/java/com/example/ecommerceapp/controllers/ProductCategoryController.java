@@ -1,5 +1,6 @@
 package com.example.ecommerceapp.controllers;
 
+import com.example.ecommerceapp.entities.Product;
 import com.example.ecommerceapp.entities.ProductCategory;
 import com.example.ecommerceapp.services.ProductCategoryService;
 import org.springframework.web.bind.annotation.*;
