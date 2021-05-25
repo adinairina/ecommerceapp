@@ -22,8 +22,8 @@ public class ProductController {
     }
 
     @GetMapping("api/products")
-    public List<Product> findAllProducts() {
-        return productService.findAllProducts();
+    public List<Product> findAllProducts(@RequestParam("category_id") long id) {
+        return productService.findByCategoryId(id);
     }
 
     @GetMapping("api/products/{id}")

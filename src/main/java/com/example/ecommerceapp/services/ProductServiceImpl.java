@@ -4,8 +4,8 @@ import com.example.ecommerceapp.entities.Product;
 import com.example.ecommerceapp.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-
 @Service
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
@@ -37,6 +37,19 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteProduct(long id) {
         productRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Product> findByCategoryId(long id) {
+//        List<Product> returnedList = new ArrayList<>();
+//        List<Product> allProducts = productRepository.findAll();
+//        for (Product product : allProducts) {
+//            if (product.getCategory().getId() == id) {
+//                returnedList.add(product);
+//            }
+//        }
+//        return returnedList;
+        return productRepository.findByCategoryId(id);
     }
 }
 
