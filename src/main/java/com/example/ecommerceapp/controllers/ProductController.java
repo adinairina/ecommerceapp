@@ -2,6 +2,11 @@ package com.example.ecommerceapp.controllers;
 
 import com.example.ecommerceapp.entities.Product;
 import com.example.ecommerceapp.services.ProductService;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,6 +14,7 @@ import java.util.Optional;
 @CrossOrigin("http://localhost:4200")
 @RestController
 public class ProductController {
+
 
     private final ProductService productService;
 
@@ -54,4 +60,18 @@ public class ProductController {
     public void deleteProductById(@PathVariable("id") long id) {
         productService.deleteProduct(id);
     }
+
+    @GetMapping
+    public ResponseEntity<List<Product>> getAllProducts(
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "id") String sortBy)
+    {
+        List<Product> list = productService.getAllProducts(pageNo, pageSize, sortBy);
+
+        return new ResponseEntity<List<Product>>(list, new HttpHeaders(), HttpStatus.OK);
+    }
 }
+
+
+
