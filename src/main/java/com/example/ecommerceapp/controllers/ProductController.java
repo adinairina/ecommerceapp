@@ -61,16 +61,6 @@ public class ProductController {
         productService.deleteProduct(id);
     }
 
-    @GetMapping
-    public ResponseEntity<List<Product>> getAllProducts(
-            @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "10") Integer pageSize,
-            @RequestParam(defaultValue = "id") String sortBy)
-    {
-        List<Product> list = productService.getAllProducts(pageNo, pageSize, sortBy);
-
-        return new ResponseEntity<List<Product>>(list, new HttpHeaders(), HttpStatus.OK);
-    }
 }
 
 

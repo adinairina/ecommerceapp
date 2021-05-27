@@ -18,7 +18,4 @@ public interface ProductService {
     void deleteProduct(long id);
 
     List<Product> findByCategoryId(long id);
-
-     List<Product> getAllProducts(Integer pageNo, Integer pageSize, String sortBy);
-
 }

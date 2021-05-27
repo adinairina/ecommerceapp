@@ -55,18 +55,5 @@ public class ProductServiceImpl implements ProductService {
 //        return returnedList;
         return productRepository.findByCategoryId(id);
     }
-
-    @Override
-    public List<Product> getAllProducts(Integer pageNo, Integer pageSize, String sortBy) {
-        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
-
-        Page<Product> pagedResult = productRepository.findAll(paging);
-
-        if (pagedResult.hasContent()) {
-            return pagedResult.getContent();
-        } else {
-            return new ArrayList<Product>();
-        }
-    }
 }
 
