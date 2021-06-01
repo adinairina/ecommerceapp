@@ -2,11 +2,8 @@ package com.example.ecommerceapp.controllers;
 
 import com.example.ecommerceapp.entities.Product;
 import com.example.ecommerceapp.services.ProductService;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,7 +11,6 @@ import java.util.Optional;
 @CrossOrigin("http://localhost:4200")
 @RestController
 public class ProductController {
-
 
     private final ProductService productService;
 
@@ -28,8 +24,8 @@ public class ProductController {
     }
 
     @GetMapping("api/products")
-    public List<Product> findAllProducts(@RequestParam("category_id") long id) {
-        return productService.findByCategoryId(id);
+    public Page<Product> findAllProducts(@RequestParam("category_id") long id, Pageable pageable) {
+        return productService.findByCategoryId(id, pageable);
     }
 
     @GetMapping("api/products/{id}")
@@ -56,12 +52,13 @@ public class ProductController {
         return productService.update(product);
     }
 
+    @GetMapping("/products/search")
+    public List<Product> findProductsByName(@RequestParam("keyword") String keyword){
+        return productService.findByName(keyword);
+    }
+
     @DeleteMapping("api/products/{id}")
     public void deleteProductById(@PathVariable("id") long id) {
         productService.deleteProduct(id);
     }
-
 }
-
-
-
