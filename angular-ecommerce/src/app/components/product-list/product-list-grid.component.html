@@ -15,13 +15,14 @@
             </a>
           </div>
           <div class="price"> {{product.unitPrice | currency: 'USD'}}</div>
-          <button (click)="addToCart(product)" class="primary-btn">Add to cart</button>
+          <button (click)="addToCart(product)" class="btn-primary">Add to cart</button>
         </div>
+      </div>
 
-      </div>
       <div *ngIf="products?.length == 0" class="alert alert-warning col-md-12" role="alert">
-        Product not found!
+        Sorry, there was no product found.
       </div>
+
       <!-- begin footer -->
       <div class="footer-pagination">
         <div class="row">

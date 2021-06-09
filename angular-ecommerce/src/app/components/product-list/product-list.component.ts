@@ -40,7 +40,7 @@ export class ProductListComponent implements OnInit {
       this.number = 1;
     }
     this.previousCategoryId = this.currentCategoryId;
-    this.productService.getListPaginated(this.currentCategoryId, this.number - 1, this.size).subscribe(this.getResult()
+    this.productService.getPageList(this.currentCategoryId, this.number - 1, this.size).subscribe(this.getResult()
     );
   }
 
@@ -84,9 +84,6 @@ export class ProductListComponent implements OnInit {
   addToCart(product: Product) {
     const cartItem = new CartItem(product);
     this.cartService.addToCart(cartItem);
-
-    // console.log('click pe buton');
-
   }
 
 }
